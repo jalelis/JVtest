@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.css" integrity="sha512-NhLySQDkiKSKnT+R795uaHWRQ7D3VuIvgeOLCK8cWq4w5fq4sWF90gj8eURpTqn/f1mFzqClpOz8JPlgVTLfFw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>JovTech</title>
+    <style>
+        /* General Styling Reset and Setup */
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #6C757D;
+            --text-color: #333;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --font-stack: 'Arial', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--bg-light);
+            border-bottom: 2px solid #E0E0E0;
+            box-shadow: #000 0 0 20px;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .left-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5em;
+            color: var(--text-color);
+        }
+
+        .tag p {
+            font-size: 0.8em;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .mid-header ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .mid-header a {
+            padding: 0 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .mid-header a:hover, .mid-header .act p {
+            color: var(--primary-color);
+        }
+
+        .right-header ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .right-header a {
+            font-size: 1.2em;
+            margin-left: 15px;
+            color: var(--text-color);
+        }
+
+        .right-header a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content Styling */
+        .home {
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        .home h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            color: var(--text-color);
+        }
+
+        .web-main {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Styling - General */
+        .section-content {
+            display: none; /* Hide all sections by default */
+        }
+
+        .section-content.active {
+            display: block; /* Show the active section */
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid #E0E0E0;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Home Section */
+        #home-section .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        #home-section .main-content img {
+            width: 40%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #home-section .main-description {
+            width: 60%;
+        }
+
+        #home-section .main-description h2 {
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+
+        #home-section .add-info {
+            margin-bottom: 40px;
+        }
+
+        #home-section .add-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #home-section .add-info li {
+            background: #f1f1f1;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        #home-section .ex-project {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        #home-section .ex-project .img {
+            flex: 1 1 30%;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        #home-section .ex-project img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* About Section */
+        #about-section .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        #about-section .main-content img {
+            width: 35%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #about-section .main-description {
+            width: 65%;
+        }
+
+        #about-section .main-description h2 {
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+
+        #about-section .vid a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff0000; /* YouTube Red */
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            letter-spacing: 1px;
+        }
+
+        #about-section .vid a:hover {
+            background-color: #cc0000;
+        }
+
+        #about-section .add-info-about {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        #about-section .about-me {
+            flex: 1;
+        }
+
+        #about-section .about-me h2 {
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        #about-section .about-me ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #about-section .about-me li {
+            margin-bottom: 5px;
+        }
+
+        #about-section .img-about-me {
+            flex: 1;
+            text-align: center;
+        }
+
+        #about-section .img-about-me img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        #about-section .mission {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #about-section .mission h2 {
+            border-bottom: none;
+        }
+
+        /* Portfolio Section */
+        #portfolio-section .add-info-about {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        #portfolio-section .about-me {
+            flex: 1;
+        }
+
+        #portfolio-section .about-me h2 {
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+
+        #portfolio-section .about-me ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        #portfolio-section .about-me li {
+            margin-bottom: 5px;
+        }
+
+        #portfolio-section .img-about-me {
+            flex: 1;
+            text-align: center;
+        }
+
+        #portfolio-section .img-about-me img {
+            max-width: 100%;
+            height: auto;
+            max-height: 250px;
+            border-radius: 8px;
+        }
+        
+        #portfolio-section .main-project {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #portfolio-section .main-project img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        #portfolio-section .mission {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Skills Section */
+        #skills-section .skills {
+            margin-bottom: 40px;
+        }
+
+        #skills-section .skills ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        #skills-section .skills li {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #skills-section .skills i {
+            margin-right: 8px;
+        }
+
+        #skills-section .mission {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #skills-section .mission p {
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        /* Testimonials Section */
+        #testimonials-section .testimonials {
+            text-align: center;
+            padding: 50px;
+            border: 2px dashed var(--secondary-color);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        #testimonials-section .testimonials h2 {
+            color: var(--secondary-color);
+            border-bottom: none;
+            font-size: 2.5em;
+        }
+
+        #testimonials-section .testimonials p {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+        }
+
+        #testimonials-section .mission {
+            text-align: center;
+        }
+        
+        #testimonials-section .mission p {
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        #contact-section .contact {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contact-section .contact h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: none;
+        }
+
+        #contact-section form div {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        #contact-section form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 1.1em;
+        }
+
+        #contact-section form input[type="text"],
+        #contact-section form input[type="email"],
+        #contact-section form input[type="tel"],
+        #contact-section form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        #contact-section form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        #contact-section form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        #contact-section form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Common CTA Button */
+        .btn-contact {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-contact a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-contact a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styling - Minimalist */
+        .footer {
+            background-color: #343A40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .footer > div {
+            margin-bottom: 10px;
+        }
+
+        .footer i {
+            font-size: 1.5em;
+            margin: 0 5px;
+            text-align: center;
+        }
+        /*
+        .socmed{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .socmed ul a {
+            color: white;
+            font-size: 1.2em;
+            margin: 0 10px 0 10px;
+            border: 1px solid #000;
+        }
+
+        .footer .socmed a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer .terms p {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .socmed .fa-solid {
+             font-size: 16px;
+        }
+        .fa-facebook:before{
+            background-color:transparent;
+            border-radius: 90px; 
+            Color:#0866ff;
+        }
+        .fa-instagram{
+            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)
+        }
+
+        */
+        .socmed{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .socmed ul a{
+            margin: 0 10px 0 10px;
+            font-size: 18px;
+            color: #fff;
+            text-shadow: #000 1px 1px 3px;
+        
+
+        }
+        .fa-square-youtube{
+            color: #f00;
+        }
+
+        .fa-facebook{
+            background-color:transparent;
+            border-radius: 90px; 
+            Color:#0866ff;
+        }
+        .fa-instagram{
+            text-align: center;
+            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4)
+        }
+        /* Font Awesome icons simulation (since external CDN is removed) */
+        /* You must replace the <i> tags with actual icons or remove them, as these characters might not display correctly */
+        /* For this example, I'll use simple text symbols or remove them where appropriate for an HTML-only solution. */
+        
+        /* Simulating font-awesome icons with placeholder text */
+        
+        .fa-thin:before, .fa-phone:before, .fa-brands:before, .fa-solid:before, .fa-regular:before {
+            font-style: normal;
+            font-weight: normal;
+            margin-right: 5px;
+        }
+        
+        .fa-circle-user:before { content: "👤"; }
+        .fa-phone:before { content: "📞"; }
+        .fa-earth-asia:before { content: "🌐"; }
+        .fa-copyright:before { content: "©"; }
+        .fa-html5:before { content: "🌐"; }
+        .fa-css3-alt:before { content: "#"; }
+        .fa-c:before { content: "C"; }
+        .fa-java:before { content: "☕"; }
+        .fa-python:before { content: "🐍"; }
+        .fa-pen-ruler:before { content: "✏️"; }
+        .fa-layer-group:before { content: "🏗️"; }
+        .fa-paintbrush:before { content: "🖌️"; }
+        .fa-palette:before { content: "🎨"; }
+        .fa-canva:before { content: "🖼️"; }
+        .fa-gears:before { content: "⚙️"; }
+        .fa-user:before { content: "🧑"; }
+        .fa-comment:before { content: "💬"; }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 900px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .mid-header {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+            }
+            .mid-header ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .mid-header a {
+                padding: 5px 10px;
+                font-size: 0.9em;
+            }
+            .left-header, .right-header {
+                margin-bottom: 10px;
+            }
+            #home-section .main-content,
+            #about-section .main-content,
+            #about-section .add-info-about,
+            #portfolio-section .add-info-about {
+                flex-direction: column;
+            }
+            #home-section .main-content img,
+            #about-section .main-content img,
+            #about-section .main-description,
+            #about-section .about-me,
+            #about-section .img-about-me,
+            #portfolio-section .about-me,
+            #portfolio-section .img-about-me {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            #skills-section .skills ul {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .home h1 {
+                font-size: 2em;
+            }
+            .web-main {
+                padding: 20px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.mid-header a');
+            const sections = document.querySelectorAll('.section-content');
+
+            // Function to change URL hash and update active state
+            const navigateTo = (sectionId, linkElement) => {
+                // Update active link class
+                navLinks.forEach(link => link.classList.remove('act'));
+                linkElement.classList.add('act');
+                
+                // Hide all sections
+                sections.forEach(section => section.classList.remove('active'));
+
+                // Show the target section
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            };
+
+            // Event listener for navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    
+                    // Determine the target section ID from the href
+                    let href = link.getAttribute('href');
+                    let sectionId;
+                    
+                    if (href === 'index.html' || href === '../index.html' || href === 'home.htm') {
+                        sectionId = 'home-section';
+                    } else if (href.includes('about.htm')) {
+                        sectionId = 'about-section';
+                    } else if (href.includes('portfolio.htm')) {
+                        sectionId = 'portfolio-section';
+                    } else if (href.includes('skills.htm')) {
+                        sectionId = 'skills-section';
+                    } else if (href.includes('testimonials.htm')) {
+                        sectionId = 'testimonials-section';
+                    } else if (href.includes('contact.htm')) {
+                        sectionId = 'contact-section';
+                    }
+
+                    if (sectionId) {
+                        navigateTo(sectionId, link);
+                        // Optional: Update browser history without full reload
+                        history.pushState(null, '', `#${sectionId.replace('-section', '')}`);
+                    }
+                });
+            });
+
+            // Handle initial load based on URL hash or default to home
+            const initialSection = window.location.hash.substring(1) || 'home';
+            const initialLink = Array.from(navLinks).find(link => 
+                link.getAttribute('href').includes(initialSection) || (initialSection === 'home' && (link.getAttribute('href') === 'index.html' || link.getAttribute('href') === '../index.html'))
+            );
+            
+            if (initialLink) {
+                navigateTo(initialSection + '-section', initialLink);
+            } else {
+                // Default to Home if no valid hash is found
+                navigateTo('home-section', document.querySelector('.mid-header a[href*="index.html"], .mid-header a[href*="home.htm"]'));
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="left-header">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/logo.png" alt="Logo image placeholder">
+                    </a>
+                    <a href="index.html"> 
+                        <h1>JovTech </h1>
+                    </a>
+                </div>
+                <div class="tag">
+                    <p>Turning Ideas Into Digital Reality.</p>
+                </div>
+            </div>
+            <div class="mid-header">
+                <ul>
+                    <a href="index.html" class="act"><p>home</p></a>
+                    <a href="html/about.htm"><p>about</p></a>
+                    <a href="html/portfolio.htm"><p>portfolio</p></a>
+                    <a href="html/skills.htm"><p>skills</p></a>
+                    <a href="html/testimonials.htm"><p>testimonials</p></a>
+                    <a href="html/contact.htm"><p>contact</p></a>
+                </ul>
+            </div>
+            <div class="right-header">
+                    <ul>
+                        <a href="#"><i class="fas fa-thin fa-circle-user"></i></a>
+                        <a href="mailto:jalelis@ccc.edu.ph" target="_blank"><i class="fas fa-phone"></i></a>
+                    </ul>
+            </div>
+        </div>
+    </header>
+    <main class="home">
+        <div class="container">
+            <section id="home-section" class="web-main section-content active">
+                <h1>Welcome to JovTech</h1>
+                <div class="main-content">
+                    <img src="img/main_content.png" alt="JovTech Workshop Image placeholder">
+                    <div class="main-description">
+                        <h2>JovTech Workshop: Design & Code for the Future</h2>
+                        <p>I hosted the Jov Tech Workshop on October 26, 2026, at SM Calamba, where participants learned the fundamentals of design and programming.
+                            The event focused on merging creativity and technology—helping beginners and aspiring developers gain hands-on experience in both visual design and coding.
+                            Through this workshop, I shared my passion for building innovative digital solutions and encouraged others to explore the exciting world of tech.</p>
+                    </div>
+                </div>
+                <div class="add-info">
+                    <h2>
+                        Why Partner with JOV TECH? (Our Core Services)
+                    </h2>
+                    <p>
+                        Leveraging our extensive expertise in Design & Code, we offer specialized services aimed at creating cutting-edge digital solutions:
+                    </p>
+                    <ul>
+                        <li><span>Website Development:</span> Building fast, secure, and fully responsive websites tailored to your business needs.</li>
+                        <li><span>UI/UX Design:</span> Crafting intuitive and aesthetically pleasing user interfaces that drive engagement.</li>
+                        <li><span>Custom Software Solutions:</span> Developing specialized, tailored applications to meet your unique operational requirements.</li>
+                    </ul>
+                </div>
+                <div class="ex-project">
+                    <div class="img">
+                    <img src="img/JovTech_BadgeLogo.png" alt="Badge Logo placeholder">
+                    </div>
+                    <div class="img">
+                    <img src="img/JovTech_IconLogo.png" alt="Icon Logo placeholder">
+                    </div>
+                    <div class="img">
+                    <img src="img/JovTech_VerticalLogo.png" alt="Vertical Logo placeholder">
+                    </div>
+                </div>
+            </section>
+
+            <section id="about-section" class="web-main section-content">
+                <h1>About JovTech</h1>
+                <div class="main-content">
+                    <img src="img/me.png" alt="Joverich Lelis profile image placeholder">
+                    <div class="main-description">
+                        <h2>About Me</h2>
+                        <p>
+                            I’m Joverich Lelis, a 21-year-old student from Calamba City, Laguna, who’s passionate about technology, creativity, and personal growth. Ever since I discovered the world of programming and design, I’ve been fascinated by how imagination and logic come together to create something meaningful. For me, technology isn’t just a tool  it’s a way to express ideas, solve problems, and build something that can inspire others.
+                            <br><br>I love exploring new things  whether it’s coding a system, designing visuals, or learning new digital tools. Each project I work on teaches me something valuable about persistence and creativity. My biggest goal is to become a professional software developer and use my skills to bring innovation into people’s lives. I believe that through technology, we can make a real difference and turn even the simplest ideas into reality.
+                            <br><br>Outside of coding, I enjoy photography, editing, and discovering creative ways to share stories through visuals. I find inspiration in everyday experiences and in people who are driven by passion and purpose.
+                        </p>
+                        <div class="btn-contact">
+                            <a href="#" target="_blank"><i class="fa-brands fa-square-youtube"></i> Video Introduction</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Me
+                        </h2>
+                        <ul>
+                            <li>
+                                Joverich Lelis
+                            </li>
+                            <li>
+                                21 Years Old
+                            </li>
+                            <li>
+                                Calamba City, Laguna
+                            </li>
+                            <li>
+                                jalelis@ccc.edu.ph
+                            </li>
+                            <li>
+                                +63 907 669 6013
+                            </li>
+                            <li>
+                                Student at Calamba City College
+                            </li>
+                            <li>
+                                Bachelor of Science in Computer Science
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/bgme.jpg" alt="Background Image placeholder">
+                    </div>
+                </div>
+                <div class="mission">
+                    <h2>
+                        My Mission
+                    </h2>
+                    <p>
+                        My mission is to continuously learn and grow as a developer and designer, pushing the boundaries of what I can create. I aim to build innovative digital solutions that not only meet user needs but also inspire creativity and positive change. Through my work, I want to contribute to the tech community and help others discover the power of technology in transforming ideas into reality.
+                    </p>
+                </div>
+                <div class="btn-contact">
+                    <a href="mailto:jalelis@ccc.edu.ph" target="_blank">Contact Me</a>
+                </div>
+            </section>
+
+            <section id="portfolio-section" class="web-main section-content">
+                <h1>Projects</h1>
+                <div class="main-project">
+                    <img src="img/proj1.png" alt="Digital Marketing Graphics image placeholder">
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Digital Marketing Graphics
+                        </h2>
+                        <ul>
+                            <li>
+                                October 2025
+                            </li>
+                            <li>
+                                Exhibits, Workshops, Competitions
+                            </li>
+                            <li>
+                                Click the image to view pdf file 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <a href="pdf/digitalMarketing.pdf" target="_blank">
+                            <img src="img/proj1.png" alt="Digital Marketing Graphics thumbnail image placeholder">
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Typography Brand Poster
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/TypographyBrandPoster.png" alt="Typography Brand Poster image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Poster Design for Event
+                        </h2>
+                        <ul>
+                            <li>
+                                October 26, 2026
+                            </li>
+                            <li>
+                                SM Calamba
+                            </li>
+                            <li>
+                                8:00 AM - 11:00 AM
+                            </li>
+                            <li>
+                                Workshop on Design & Code
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/main_content.png" alt="Poster Design image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Flyer Design for Event
+                        </h2>
+                        <ul>
+                            <li>
+                                October 26, 2026
+                            </li>
+                            <li>
+                                8:00 AM - 11:00 AM
+                            </li>
+                            <li>
+                                Workshop on Design & Code
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/flyer.png" alt="Flyer Design image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Elements of Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/fruit.jpg" alt="Elements of Design image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Badge Logo Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/JovTech_BadgeLogo.png" alt="Badge Logo image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Icon Logo Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/JovTech_IconLogo.png" alt="Icon Logo image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Vertical Logo Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/JovTech_VerticalLogo.png" alt="Vertical Logo image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Horizontal Logo Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/JovTech_HorizontalLogo.png" alt="Horizontal Logo image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Personal Magazine Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                            <li>
+                                Click the image to view pdf file 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <a href="pdf/LELIS_MagazineMe.pdf" target="_blank">
+                            <img src="img//me.png" alt="Personal Magazine Design image placeholder">
+                        </a>
+                    
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Mood Board Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <img src="img/moodboard.png" alt="Mood Board Design image placeholder">
+                    </div>
+                </div>
+                <div class="add-info-about">
+                    <div class="about-me">
+                        <h2>
+                            Wireframe Design
+                        </h2>
+                        <ul>
+                            <li>
+                                2025
+                            </li>
+                            <li>
+                                Click the image to view pdf file 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="img-about-me">
+                        <a href="pdf/LELIS_MyPortfolio.pdf" target="_blank">
+                            <img src="img/wireframe.png" alt="Wireframe Design image placeholder">
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="mission">
+                    <h2>
+                    </h2>
+                    <p>
+                        Behind every project here is a story of learning, creativity, and persistence. My portfolio is more than a showcase — it’s a reminder of how far I’ve come and how much more I can achieve through continuous improvement.                 
+                    </p>
+                </div>
+                <div class="btn-contact">
+                    <a href="mailto:jalelis@ccc.edu.ph" target="_blank">Contact Me</a>
+                </div>
+            </section>
+            
+            <section id="skills-section" class="web-main section-content">
+                <h1>Skills</h1>
+                <div class="skills">
+                    <h2>Skills</h2>
+                    <ul>
+                            <li><i class="fa-brands fa-html5"></i> HTML5</li>
+                            <li><i class="fa-brands fa-css3-alt"></i> CSS3</li>
+                            <li><i class="fa-solid fa-c"></i> C++</li>
+                            <li><i class="fa-brands fa-java"></i> Java</li>
+                            <li><i class="fa-brands fa-python"></i> Python</li>
+                            <li><i class="fa-solid fa-pen-ruler"></i> UI/UX Design</li>
+                            <li><i class="fa-solid fa-layer-group"></i> Wireframing</li>
+                            <li><i class="fa-solid fa-paintbrush"></i> Poster Design</li>
+                            <li><i class="fa-solid fa-palette"></i> Graphic Designing</li>
+                            <li><i class="fa-brands fa-canva"></i> Canva</li>
+                    </ul>
+                </div>
+                <div class="mission">
+                    <h2>
+                    </h2>
+                    <p style="text-align: center;">
+                        “JovTech is where imagination meets innovation — design meets code.”
+                    </p>
+                </div>
+                <div class="btn-contact">
+                    <a href="mailto:jalelis@ccc.edu.ph" target="_blank">Contact Me</a>
+                </div>
+            </section>
+
+            <section id="testimonials-section" class="web-main section-content">
+                <h1>Testimonials</h1>
+                <div class="testimonials">
+                    <h2><i class="fas fa-gears"></i>Under Maintenance</h2>
+                    <p>We’re currently updating this page to serve you better.<br>
+                         Please check back soon!</p>
+                </div>
+                <div class="mission">
+                    <h2>
+                    </h2>
+                    <p style="text-align: center;">
+                        These testimonials remind me that every project is not just about design or code — it’s about growth, creativity, and collaboration. Each feedback inspires me to keep improving and to continue building meaningful work through JovTech.
+                    </p>
+                </div>
+            </section>
+
+            <section id="contact-section" class="web-main section-content">
+                <h1>Contact</h1>
+                <div class="contact">
+                    <h2>Feel free to reach out <br>I'll get bact to you as soon as possible.</h2>
+                    <form onsubmit="alert('Message Sent! (Form submission is for demonstration purposes only in this HTML-only file.)'); return false;">
+                        <div>
+                            <label><i class="fa-solid fa-user"></i> Name:</label><input type="text" name="name" required>
+                        </div>
+                        <div>
+                            <label><i class="fa-solid fa-envelope"></i> Email:</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div>
+                            <label><i class="fa-solid fa-phone"></i> Phone:</label>
+                            <input type="tel" name="phone">
+                        </div>
+                        <div>
+                            <label><i class="fa-solid fa-comment"></i> Message:</label>
+                            <textarea name="message" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <i class="fas fa-earth-asia"></i>
+        </div>
+        <div class="socmed">
+            <ul>
+                <a href="mailto:jalelis@ccc.edu.ph" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.facebook.com/jov.lelis.2024" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </ul>
+        </div>
+        <div class="terms">
+            <p> <i class="fa-regular fa-copyright"></i> 2024 JovTech. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
